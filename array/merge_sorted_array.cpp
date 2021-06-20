@@ -1,68 +1,59 @@
 #include <iostream>
-#include <algorithm>  //swap
 #include <vector>
 
 using namespace std;
 
-
 int main() {
-//vectore  similar as an array, define a vector and output the result
-//**********************************************************************
-	vector<int> nums1 ={3,6,4,2};
-	vector<int> nums2 ={11,10,5};
-	int m=4;
-	int n=3;
-	int size=m+n;
+	vector<int> nums ={2,7,11,15};
+	vector<int> result(2);//vector 的元素初始值为0
 
+    int size= nums.size();
+    cout<<"size: "<<size<<endl;
+    int target=9;
+    int p1=0;
+    int p2=size-1;
+    int sum=0;
 
-
-//******************************************************
-
-	for (int i=0; i< size; i++)
+//p1从数列左边开始右移,p2从数列右边开始左移，如果p1+p2 小于 target 值，p1继续右移；
+//如果p1+p2 大于 target 值，p2继续左移；
+//************************************************************************
+//我第一次写的答案
+ //   	while((nums[p1]+nums[p2])!=target)
+	// {
+	//     if(nums[p1]+nums[p2]<target)
+	//     {
+	//     	p1++;
+	//     }
+	//     else
+	//     {
+	//     	p2--;
+	//     }
+	// }
+//************************************************************************
+//leetcode101的答案
+	while(p1<p2)
 	{
-		if(i<m)
+		sum = nums[p1]+nums[p2];
+		if(sum ==target)
 		{
-			nums1[i]=nums1[i];
-
+			break;
+		}
+		else if( sum > target)
+		{
+			p2--;
 		}
 		else
 		{
-			nums1[i]=nums2[i-m];
+			p1++;
 		}
-
 	}
-
-//******************************************************
-//sort array nums1 冒泡排序
-
-for (int j=0; j< size; j++)
-{
-	for (int i=0; i<size-1-j;i++)
-	{
-		cout<< "i: "<< i << endl;
-		// int temp=0;
-		if(nums1[i+1]<nums1[i])
-		{
-
-			// temp=nums1[i];
-			// nums1[i]=nums1[i+1];
-			// nums1[i+1]=temp;
-			swap(nums1[i],nums1[i+1]);//change two data
-		}
-}
-
-	
-	}
-
-//******************************************************
-//out put array
+	result[0]=p1+1;
+	result[1]=p2+1;
 
 
-	for(int i=0; i<size; i++)
-	{
-		cout<< "nums1 "<< nums1[i] << endl;
-	}
-
-
+  	for(int k=0;k<2;k++)
+  	{
+		cout<<"result: "<<result[k]<<endl;
+  	}
 
 };
